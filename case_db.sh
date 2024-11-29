@@ -3,7 +3,7 @@
 # Fungsi untuk menyimpan input ke database MariaDB
 log_to_db() {
     local input="$1"
-    mysql -u iki -pyoursecurepassword -e  "USE latihan; INSERT INTO log_input (input_text) VALUES ('$input');"
+    mysql -u yourusername -p yoursecurepassword -e  "USE latihan; INSERT INTO log_input (input_text) VALUES ('$input');"
 }
 
 echo "haii selamat datang di happymart ada yang bisa saya bantu"
