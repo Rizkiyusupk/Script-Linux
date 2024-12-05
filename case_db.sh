@@ -3,16 +3,29 @@
 # Fungsi untuk menyimpan input ke database MariaDB
 log_to_db() {
     local input="$1"
-    mysql -u yourusername -p yoursecurepassword -e  "USE latihan; INSERT INTO log_input (input_text) VALUES ('$input');"
+    mysql -u iki -piki123 -e  "USE latihan; INSERT INTO log_input (input_text) VALUES ('$input');"
+}
+log_db() {
+	nama_barang=$1
+	mysql -u  iki -piki123 -e "use latihan ; select * from stock_barang where nama_barang='$nama_barang'" -t
 }
 
 echo "haii selamat datang di happymart ada yang bisa saya bantu"
+echo "apakah anda ingin cek stock barang yang ada atau ingin tahu letak produk??"
 read cs
 input_cs=$(echo "$cs" | tr "[:upper:]" "[:lower:]")
 
 # Log input pertama
+if [ "$input_cs" == 'cek stock' ];
+then
+	read -p "Masukan nama barang: " nama_barang
+        log_db "$nama_barang"
+        db=$("log_db")
+        echo "$db"
 
-if [ "$input_cs" == 'iya' ]; then
+
+fi
+if [ "$input_cs" == 'letak produk' ]; then
     echo "baiklah apa yang anda inginkan"
     read cs1
     lower=$(echo "$cs1" | tr "[:upper:]" "[:lower:]")
@@ -56,7 +69,7 @@ if [ "$input_cs" == 'iya' ]; then
             if [ "$lower_csi" == "ada" ]; then
                 read cso
                 lower_cso=$(echo "$cso" | tr "[:upper:]" "[:lower:]")
-                log_to_db "$cso"
+                log_to_db "$lower_cso"
 
                 case $lower_cso in
                     "daging babi")
