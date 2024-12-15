@@ -46,7 +46,7 @@ then
                         while [ $counter -le $bos_c ];
                         do
                                 echo "hello world"
-                         docker run -it --name mariadb_container"$counter" mariadb:latest 
+                         docker run -d --name mariadb1"$counter" -e MARIADB_ROOT_PASSWORD=iki123 mariadb:latest
                                ((counter++))
                         done
 
