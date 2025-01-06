@@ -1,11 +1,11 @@
 #!/bin/bash
-echo "haii boss butuh container buat deploy??"
+echo "haii bos want to deploy a container??y/n"
 read bos
 lower_bos=$(echo "$bos" | tr "[:upper:]" "[:lower:]")
-if [ $lower_bos == "iya" ];
+if [ $lower_bos == "y" ];
 then
 
-        echo "baik mau ngambil image yang mana??"
+        echo "alright which want images you want to use??"
         images=(ubuntu mysql mariadb)
         for i in {!}
         do
@@ -18,7 +18,7 @@ then
         lower_bos=$(echo "$bos2" | tr "[:upper:]" "[:lower:]")
         if [ $lower_bos == 'ubuntu' ];
 	then
-		 echo "baik bos butuh berapa container??"
+		 	echo "alright boss how many container you want???"
                         read bos_c
                         counter=1
                         while [ $counter -le $bos_c ];
@@ -29,89 +29,87 @@ then
                         done
 		elif [ $lower_bos == 'mysql' ]
 		then
-			echo "baik bos butuh berapa container??"
+			echo "alright bos how many container you want???"
                         read bos_c
+			echo "and password for login to the database??"
+   			read user
                         counter=1
                         while [ $counter -le $bos_c ];
                         do
                                 echo "hello world"
-                         docker run -it --name sql_container'$counter' -e  MYSQL_ROOT_PASSWORD=iki123  mysql:latest 
-			 	echo "root password nya iki123"
+                         docker run -it --name sql_container'$counter' -e  MYSQL_ROOT_PASSWORD=$user  mysql:latest 
                                ((counter++))
                         done
 		elif [ $lower_bos == 'mariadb' ]
 		then
-			echo "baiklah bos kamu memilih buat container database"
-			echo "jadi sehubung dengan container yang menyimpan database apakah kamu mau pake bind buat jaga jaga backup datanya,jadi mau ga bos?"
-			read bos_c 
-			lower_bos_c=$(echo "$bos_c" | tr "[:upper:]" "[:lower:]")
-			if [ $lower_bos_c == 'iya' ]
+			echo "alright bos so you chose an database images"
+			echo "cause you chose an database images you should make a bind for you database bakcup,y/n"
+			read bind
+			lower_bind=$(echo "$bind" | tr "[:upper:]" "[:lower:]")
+			if [ $lower_bind == 'y' ]
 			then
-				echo "ehh pak boss sekalian ga pak boss mau sama port forwarding nya??"
-				read bos_c2 
-				lower_bos_c2=$(echo "$bos_c2" | tr "[:upper:]" "[:lower:]")
-				if [ $lower_bos_c2 == 'iya' ]
+				echo "do you want port forwarding also,y/n??"
+				read port_forward 
+				lower_port_forward=$(echo "$port_forward" | tr "[:upper:]" "[:lower:]")
+				if [ $lower_port_forward == 'y/n' ]
 				then
-					echo "baiklah pak bos mau nya bind container sama port forwarding yaa okeh jadi tinggal masukan input ya bos!!"
-					echo "masukan input buat bind pake absolute path yah bos!!"
-					read bos_c3
-					lower_bos_c3=$( echo "$bos_c3" | tr "[:upper:]" "[:lower:]")
+					echo "so you want both !!"
+					echo "input for absolute path for bind!!"
+					read bind_path
+					lower_bind_path=$( echo "$bind_path" | tr "[:upper:]" "[:lower:]")
 					if [ -d $lower_bos_c ]
 					then
-						echo "masukan input buat port forwardnya buat di host"
-        	                                read bos_c4
-	                                        echo "masukan input buat port forwardnya buat di container"
-                                       		read bos_c4_cont
-                                       	        echo "sekalian pak bos nama untuk container nya"
-            	                                read nama_cont
-                    	                        echo "sama masukan buat kata sandi root nya pak boss"
-                                                read sandi
-                                                lower_sandi=$(echo "$sandi" | tr "[:upper:]" "[:lower:]")
-                                                lower_nama_cont=$(echo "$nama_cont" | tr "[:upper:]" "[:lower:]")
-                                docker run -v "$lower_bos_c3:/var/lib/msysql" -d --name "$lower_nama_cont" -p $bos_c4:$bos_c4_cont -e MARIADB_ROOT_PASSWORD=$lower_sandi mariadb:latest
-                        mysql -P $bos_c4 -u root -p$lower_sandi
+						echo "input for port forward for your host"
+        	                                read port_host
+	                                        echo "input for port forward for your container"
+                                       		read port_cont
+                                       	        echo "container name"
+            	                                read con_name
+                    	                        echo "for root password"
+                                                read password
+                                                lower_password=$(echo "$password" | tr "[:upper:]" "[:lower:]")
+                                                lower_cont_name=$(echo "$cont_name" | tr "[:upper:]" "[:lower:]")
+                                docker run -v "$lower_bind_path:/var/lib/msysql" -d --name "$cont_name" -p $port_host:$port_cont -e MARIADB_ROOT_PASSWORD=$lower_sandi mariadb:latest
 	else
-			echo "waduhh direktorinya belum ada pak boss saya bikinin dulu!!!"
-			mkdir $lower_bos_c3
-		        echo "masukan input buat port forwardnya buat di host"
-                        read bos_c4
-                        echo "masukan input buat port forwardnya buat di container"
-                        read bos_c4_cont
-                        echo "sekalian pak bos nama untuk container nya"                       
-                        read nama_cont
-                        echo "sama masukan buat kata sandi root nya pak boss"
-                        read sandi
-                        lower_sandi=$(echo "$sandi" | tr "[:upper:]" "[:lower:]")
-                        lower_nama_cont=$(echo "$nama_cont" | tr "[:upper:]" "[:lower:]")
-                        	docker run -v "$lower_bos_c3:/var/lib/msysql" -d --name "$lower_nama_cont" -p $bos_c4:$bos_c4_cont -e MARIADB_ROOT_PASSWORD=$lower_sandi mariadb:latest
-				 mysql -P $bos_c4 -u root -p$lower_sandi
-
+			echo "there is no such a directory like that,i'll make it first!!!"
+			mkdir $lower_bind
+		        echo "input port forward for your host"
+                        read port_host
+                        echo "input port forward for your container"
+                        read port_cont
+                        echo "container name"                       
+                        read cont_name
+			echo "for root password"
+                        read password
+                        lower_password=$(echo "$password" | tr "[:upper:]" "[:lower:]")
+                        lower_cont_name=$(echo "$cont_name" | tr "[:upper:]" "[:lower:]")
+                        	docker run -v "$lower_bind:/var/lib/msysql" -d --name "$cont_name" -p $port_host:$port_cont -e MARIADB_ROOT_PASSWORD=$lower_password mariadb:latest
 					fi
 				else
-					echo "baiklah jika pak boss ga mau port forward"
-					echo "silahkan pak bos masukin absolute path direktorinya"
-					read bos_c5
-					lower_bos_c5=$(echo "$bos_c5" | tr "[:upper:]" "[:lower:]")
+					echo "so you just want to bind the container without using port forward"
+					echo "input for the absolute path"
+					read bind_path
+					lower_bind_path=$(echo "$bind_path" | tr "[:upper:]" "[:lower:]")
 					if [ -d $lower_bos_c5 ]
 					then
-						echo "direktorinya ada bos silahkan untuk input langsung semua yang dibutuhkan"
-						echo "sekalian pak bos nama buat containernya "
-						read nama
-						lower_nama=$(echo "$nama" |  tr "[:upper:]" "[:lower:]" )
-						echo "sama password root nya pak bos"
+						echo "right all good "
+						echo "name for then container "
+						read cont_name
+						lower_cont_name=$(echo "$cont_name" |  tr "[:upper:]" "[:lower:]" )
+						echo "root password"
 						read password
 						lower_password=$(echo "$password" |  tr "[:upper:]" "[:lower:]")
-						docker run -v "$lower_bos_c5:/var/lib/mysql" -d --name "$lower_nama" -e MARIADB_ROOT_PASSWORD=$lower_password mariadb:latest
+						docker run -v "$lower_bind_path:/var/lib/mysql" -d --name "$lower_cont_name" -e MARIADB_ROOT_PASSWORD=$lower_password mariadb:latest
 					else
-						echo "aduhh pak boss direktorinya belum ada saya buatkan dulu"
-						mkdir  $lower_bos_c5 
-						echo "sekalian pak bos nama buat containernya "
-                                                read nama
-                                                lower_nama=$(echo "$nama" |  tr "[:upper:]" "[:lower:]" )
-                                                echo "sama password root nya pak bos"
+						echo "there no such directory name like that,i'll make it first!!! "
+						mkdir  $lower_bind_path 
+						echo "container name "
+                                                read cont_name
+                                                lower_cont_name=$(echo "$cont_name" |  tr "[:upper:]" "[:lower:]" )
+                                                echo "for root password"
                                                 read password
                                                 lower_password=$(echo "$password" |  tr "[:upper:]" "[:lower:]")
-                                                docker run -v "$lower_bos_c5:/var/lib/mysql" -d --name "$lower_nama" -e MARIADB_ROOT_PASSWORD=$lower_password mariadb:latest
+                                                docker run -v "$lower_bind_path:/var/lib/mysql" -d --name "$lower_cont_name" -e MARIADB_ROOT_PASSWORD=$lower_password mariadb:latest
 
 					fi
 				fi
