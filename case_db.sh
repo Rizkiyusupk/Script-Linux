@@ -10,13 +10,13 @@ log_db() {
 	mysql -u  iki -piki123 -e "use latihan ; select * from stock_barang where nama_barang='$nama_barang'" -t
 }
 
-echo "haii selamat datang di happymart ada yang bisa saya bantu"
-echo "apakah anda ingin cek stock barang yang ada atau ingin tahu letak produk??"
+echo "heyy what i can do for you sir"
+echo "want to check product stock,y/n??"
 read cs
 input_cs=$(echo "$cs" | tr "[:upper:]" "[:lower:]")
 
 # Log input pertama
-if [ "$input_cs" == 'cek stock' ];
+if [ "$input_cs" == 'y' ];
 then
 	read -p "Masukan nama barang: " nama_barang
         log_db "$nama_barang"
