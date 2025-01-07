@@ -7,7 +7,7 @@ log_to_db() {
 }
 log_db() {
 	nama_barang=$1
-	mysql -u  iki -piki123 -e "use latihan ; select * from stock_barang where nama_barang='$nama_barang'" -t
+	mysql -u  iki -p$your_secret_password -e "use latihan ; select * from stock_barang where nama_barang='$nama_barang'" -t
 }
 
 echo "heyy what i can do for you sir"
