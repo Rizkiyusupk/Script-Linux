@@ -25,8 +25,8 @@ then
 
 
 fi
-if [ "$input_cs" == 'letak produk' ]; then
-    echo "baiklah apa yang anda inginkan"
+if [ "$input_cs" == 'n' ]; then
+    echo "alrigth so what you want??"
     read cs1
     lower=$(echo "$cs1" | tr "[:upper:]" "[:lower:]")
 
@@ -34,82 +34,82 @@ if [ "$input_cs" == 'letak produk' ]; then
     log_to_db "$cs1"
 
     case $lower in
-        "sayur")
-            echo "untuk $cs1 ada di koridor 2"
-            echo "apakah masih ada yang bisa saya bantu?"
+        "vegetable")
+            echo "for $cs1 is located in aisle 2"
+            echo "is there anything i can do for you again sir?y/n"
             read cs2
             lower1=$(echo "$cs2" | tr "[:upper:]" "[:lower:]")
 
-            if [ "$lower1" == "ada" ]; then
+            if [ "$lower1" == "y" ]; then
                 read cs1
                 lower_cs1=$(echo "$cs1" | tr "[:upper:]" "[:lower:]")
                 log_to_db "$cs1"
                 
                 case $lower_cs1 in 
-                    "paprika merah")
-                        echo "untuk $lower_cs1 ada di rak ke 1 di koridor 3"
+                    "red paprika")
+                        echo "The $lower_cs1 is located on shelf 1, aisle 2."
                         ;;
-                    "paprika kuning")
-                        echo "untuk $lower_cs1 ada di rak ke 2 di koridor 3"
+                    "yellow paprika")
+                        echo "The $lower_cs1 is located on shelf 2, aisle 2"
                         ;;
-                    "bayam")
-                        echo "untuk $lower_cs1 ada di rak ke 3 di koridor 3"
+                    "spinach")
+                        echo "The $lower_cs1 is located on shelf 3, aisle 2"
                         ;;
                 esac
             fi
-            echo "baiklah selamat berbelanja!!!"
+            echo "alright thank you for coming!!!"
             ;;
-        "daging")
-            echo "untuk $cs1 ada di koridor 3"
-            echo "apakah masih ada yang bisa saya bantu?"
+        "meat")
+            echo "for $cs1 is located in aisle 3"
+            echo "is there anything i can do for you again sir?y/n"
             read csi
             lower_csi=$(echo "$csi" | tr "[:upper:]" "[:lower:]")
 
 
-            if [ "$lower_csi" == "ada" ]; then
-                read cso
-                lower_cso=$(echo "$cso" | tr "[:upper:]" "[:lower:]")
-                log_to_db "$lower_cso"
+            if [ "$lower_csi" == "y" ]; then
+                read cs3
+                lower_cs3=$(echo "$cs3" | tr "[:upper:]" "[:lower:]")
+                log_to_db "$lower_cs3"
 
-                case $lower_cso in
-                    "daging babi")
-                        echo "untuk $lower_cso ada di rak 2 koridor 3"
+                case $lower_cs3 in
+                    "pork")
+                        echo "the $lower_cs3 is located on shelf 1, aisle 3"
                         ;;
-                    "daging ayam")
-                        echo "untuk $lower_cso ada di rak 1 koridor 3"
+                    "chicken")
+                        echo "the $lower_cs3 is located on shelf 1, aisle 3"
                         ;;
-                    "daging sapi")
-                        echo "untuk $lower_cso ada di rak 3 koridor 3"
-                        ;;
+                    "beef")
+                        echo "the $lower_cs3 is located on shelf 1, aisle 3"                 
+			;;
                 esac
             fi
-            echo "selamat berbelanja!!"
+            echo "thank you for coming!!"
             ;;
-        "buah")
-            echo "untuk $cs1 berada di koridor 1"
-            echo "apakah masih ada yang bisa saya bantu?"
+        "fruit")
+            echo "for $cs1 is located at aisle 1"
+            echo "is there anything i can do for you again sir?y/n"
             read cs3
             lower_cs3=$(echo "$cs3" | tr "[:upper:]" "[:lower:]")
        
 
-            if [ "$lower_cs3" == "ada" ]; then
+            if [ "$lower_cs3" == "y" ]; then
                 read csi
                 lower_csi=$(echo "$csi" | tr "[:upper:]" "[:lower:]")
                 log_to_db "$csi"
 
                 case $lower_csi in
-                    "mangga")
-                        echo "untuk $lower_csi ada di rak 1 di koridor 1"
+                    "mango")
+                        echo "the $lower_csi is located on shelf 1, aisle 1"
                         ;;
-                    "jeruk")
-                        echo "untuk $lower_csi ada di rak 2 di koridor 1"
+                    "orange")
+                        echo "the $lower_csi is located on shelf 2, aisle 1"
                         ;;
-                    "nanas")
-                        echo "untuk $lower_csi ada di rak 3 di koridor 1"
+                    "pinnaple")
+                        echo "the $lower_csi is located on shelf 3, aisle 1"
                         ;;
                 esac
             fi
-            echo "selamat berbelanja!!!"
+            echo "thenk you!!!"
             ;;  
     esac
 fi
