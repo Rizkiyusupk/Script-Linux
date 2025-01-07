@@ -24,7 +24,7 @@ then
                         while [ $counter -le $bos_c ];
                         do
                                 echo "hello world"
-                        docker run -it --name ubuntu_"$counter" ubuntu:latest bash
+                        docker run -d --name ubuntu_"$counter" ubuntu:latest bash
                                ((counter++))
                         done
 		elif [ $lower_bos == 'mysql' ]
@@ -37,7 +37,7 @@ then
                         while [ $counter -le $bos_c ];
                         do
                                 echo "hello world"
-                         docker run -it --name sql_container'$counter' -e  MYSQL_ROOT_PASSWORD=$user  mysql:latest 
+                         docker run -d --name sql_container'$counter' -e  MYSQL_ROOT_PASSWORD=$user  mysql:latest 
                                ((counter++))
                         done
 		elif [ $lower_bos == 'mariadb' ]
