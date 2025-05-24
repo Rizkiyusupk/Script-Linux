@@ -14,7 +14,9 @@ then
 	elif [[ $hasil == Exited* ]];
 	then
 		echo "hmmm container mu ada masalah seperti nya coba ku restart terlebih dahulu!!"
-		hasil1=$(docker restart "$cont")
+		docker restart "$cont"
+  		sleep 1
+    		hasil1=$(docker ps -a --filter "name=$cont" --format "{{.Status}}")
 		if [[ $hasil1 == Up* ]]; 
 		then
 			echo "yeyy docker nya sudah up lagiii!!!"
