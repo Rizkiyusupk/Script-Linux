@@ -13,8 +13,8 @@ do
                 echo "mengirim ke alamat emaill!!"
                 echo "mengirim..."
                 sleep 10
-                echo "EROR TERDETEKSI!!! SEGERA TANGANI JIKA TIDAK WEBSITE AKAN DOWN UNTUK WAKTU YANG LAMA" | mail -s "EROR TERDETEKSI" rizkiyk61@gmail.com
-		break
+                echo "EROR TERDETEKSI!!! SEGERA TANGANI JIKA TIDAK WEBSITE AKAN DOWN UNTUK WAKTU YANG LAMA" | mail -s "EROR TERDETEKSI" mail.example.com
+   	  	break
 
 	fi
 done
