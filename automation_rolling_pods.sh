@@ -1,6 +1,4 @@
 #!/bin/bash
-rizki@master:~/script$ cat automation_rolling_update_pods.sh
-#!/bin/bash
 while true
 do
         echo "rolling update pods!!!!"
